@@ -1,26 +1,17 @@
 import cv2
-
+import numpy as np
 img = cv2.imread('D:/OnlineCourses/ComputerVision_Udacity/02_Repo/ComputerVision/01_Inputs/img_1.jpg')
 
+#add noise to image
+mean = 0
+stddev = 100
+noise = np.zeros(img.shape, np.uint8)
+cv2.randn(noise,mean,stddev)
 
-image_dimensions = img.shape
-image_class = img.dtype
-#first dimension represents height, second dimension represents width, third dimension represents number of channels
-print(image_dimensions)
-#represents the data type of the pixel element
-print(image_class)
+noisy_img = cv2.add(img, noise)
 
-img_red = img[:,:,0]
-img_green = img[:,:,1]
-img_blue = img[:,:,2]
-
-image_red_dimensions = img_red.shape
-print(image_red_dimensions)
-
+cv2.imshow('noisy', noisy_img)
 cv2.imshow('original', img)
-cv2.imshow('Red_window', img_red)
-cv2.imshow('Green_window', img_green)
-cv2.imshow('Blue_window', img_blue)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
